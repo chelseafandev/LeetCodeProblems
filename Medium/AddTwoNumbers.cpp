@@ -18,7 +18,7 @@ It is guaranteed that the list represents a number that does not have leading ze
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
+#include <list>
 
 struct ListNode
 {
@@ -29,52 +29,37 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-double getSum(ListNode *l1, ListNode *l2)
+double getDoubleVal(ListNode *l)
 {
-    double Ret = 0;
-
-    std::vector<int> v1, v2;
-    ListNode *l1Next = l1->next;
-    if (l1Next == nullptr)
+    std::vector<int> vecInt;
+    ListNode *lNext = l->next;
+    if (lNext == nullptr)
     {
-        Ret += (double)l1->val;
+        return (double)l->val;
     }
     else
     {
-        v1.push_back(l1->val);
-        while (l1Next != nullptr)
+        vecInt.push_back(l->val);
+        while (lNext != nullptr)
         {
-            v1.push_back(l1Next->val);
-            l1Next = l1Next->next;
+            vecInt.push_back(lNext->val);
+            lNext = lNext->next;
         }
-
-        // reverse string to forward string
-        std::reverse(v1.begin(), v1.end());
     }
 
-    ListNode *l2Next = l2->next;
-    if (l2Next == nullptr)
+    std::string int2Str = "";
+    std::vector<int>::reverse_iterator itr;
+    for (itr = vecInt.rbegin(); itr != vecInt.rend(); itr++)
     {
-        Ret += (double)l2->val;
-    }
-    else
-    {
-        v2.push_back(l2->val);
-        while (l2Next != nullptr)
-        {
-            v2.push_back(l2Next->val);
-            l2Next = l2Next->next;
-        }
-
-        // reverse string to forward string
-        std::reverse(v2.begin(), v2.end());
+        int2Str += std::to_string(*itr);
     }
 
-    return 1.0;
+    return std::stod(int2Str);
 }
 
 ListNode *getList(double num)
 {
+    std::cout << "num: " << num << std::endl;
     ListNode *retNode = nullptr;
     std::string strNum = std::to_string(num);
     int value = 0;
@@ -117,24 +102,52 @@ ListNode *getList(double num)
 
 ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
 {
-    return getList(getSum(l1, l2));
+    double num1, num2;
+    num1 = getDoubleVal(l1);
+    num2 = getDoubleVal(l2);
+
+    // 큰 수와 작은 수를 더하는 경우 부동소수점 오류 발생할 수 있음
+    return getList(num1 + num2);
 }
 
 int main()
 {
-    ListNode *l1_3 = new ListNode(3);
-    ListNode *l1_2 = new ListNode(4, l1_3);
-    ListNode *l1_1 = new ListNode(2, l1_2);
+    std::vector<int> input1 = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+    std::vector<int> input2 = {5, 6, 4};
+    std::vector<int>::iterator itr;
+    ListNode *l1 = new ListNode(input1.at(0));
+    ListNode *curNode = l1;
+    for (itr = input1.begin(); itr != input1.end(); itr++)
+    {
+        if (itr == input1.begin())
+        {
+            continue;
+        }
+        ListNode *addedNode = new ListNode(*itr);
+        curNode->next = addedNode;
+        curNode = addedNode;
+    }
 
-    ListNode *l2_3 = new ListNode(4);
-    ListNode *l2_2 = new ListNode(6, l1_3);
-    ListNode *l2_1 = new ListNode(5, l1_2);
+    ListNode *l2 = new ListNode(input2.at(0));
+    curNode = l2;
+    for (itr = input2.begin(); itr != input2.end(); itr++)
+    {
+        if (itr == input2.begin())
+        {
+            continue;
+        }
+        ListNode *addedNode = new ListNode(*itr);
+        curNode->next = addedNode;
+        curNode = addedNode;
+    }
 
-    ListNode *ret = addTwoNumbers(l1_1, l2_1);
-
-    //std::cout << ret->val << std::endl;
-    //std::cout << ret->next->val << std::endl;
-    //std::cout << ret->next->next->val << std::endl;
-
+    ListNode *ret = addTwoNumbers(l1, l2);
+    ListNode *cur = ret;
+    std::cout << cur->val;
+    while (cur->next != nullptr)
+    {
+        cur = cur->next;
+        std::cout << cur->val;
+    }
     return 0;
 }

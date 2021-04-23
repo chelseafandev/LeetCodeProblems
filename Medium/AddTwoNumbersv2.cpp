@@ -122,17 +122,12 @@ public:
         }
 
         // 같은 자리수임에도 불구하고 마지막에 carry가 하나 있다면
-        if(carryExist)
+        if (carryExist)
         {
             result.push_back(1);
         }
 
-        std::cout << "result vector: ";
-        std::vector<int>::iterator itr;
-        for (itr = result.begin(); itr != result.end(); itr++)
-        {
-            std::cout << *itr;
-        }
+        return getList(result);
     }
 
 private:
@@ -154,12 +149,28 @@ private:
             }
         }
     }
+
+    ListNode *getList(std::vector<int> &vec)
+    {
+        ListNode *curNode = nullptr;
+        int nLen = vec.size();
+        ListNode *retNode = new ListNode(vec.at(0));
+        curNode = retNode;
+        for (int i = 1; i < nLen; i++)
+        {
+            ListNode *addedNode = new ListNode(vec.at(i));
+            curNode->next = addedNode;
+            curNode = addedNode;
+        }
+
+        return retNode;
+    }
 };
 
 int main()
 {
-    std::vector<int> input1 = {2, 4, 8};
-    std::vector<int> input2 = {5, 6, 4};
+    std::vector<int> input1 = {2, 4, 8, 1};
+    std::vector<int> input2 = {5, 6, 4, 9};
     std::vector<int>::iterator itr;
     ListNode *l1 = new ListNode(input1.at(0));
     ListNode *curNode = l1;
@@ -188,6 +199,14 @@ int main()
     }
 
     Solution s;
-    s.addTwoNumbers(l1, l2);
+    ListNode *ret = s.addTwoNumbers(l1, l2);
+    ListNode *cur = ret;
+    std::cout << cur->val;
+    while (cur->next != nullptr)
+    {
+        cur = cur->next;
+        std::cout << cur->val;
+    }
+
     return 0;
 }

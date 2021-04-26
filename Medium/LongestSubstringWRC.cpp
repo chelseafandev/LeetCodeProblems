@@ -34,7 +34,6 @@ s consists of English letters, digits, symbols and spaces.
 
 */
 #include <iostream>
-#include <map>
 
 class Solution
 {

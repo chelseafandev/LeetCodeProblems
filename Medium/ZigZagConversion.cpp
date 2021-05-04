@@ -41,10 +41,12 @@ s consists of English letters (lower-case and upper-case), ',' and '.'.
 */
 #include <iostream>
 
-class Solution {
+class Solution
+{
 public:
-    std::string convert(std::string s, int numRows) {
-        
+    std::string convert(std::string s, int numRows)
+    {
+        //
     }
 };
 

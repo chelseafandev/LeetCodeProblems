@@ -37,13 +37,67 @@ class Solution
 {
 public:
     std::vector<int> plusOne(std::vector<int> &digits)
-    {
+    {   
+        std::vector<int> nRet;
+        int nSum = 0;
+        int nCarry = 0;
+        std::vector<int>::reverse_iterator ritr = digits.rbegin();
+
+        nSum = *ritr + 1;
+        if (nSum > 9)
+        {
+            nCarry = 1;
+            *ritr = 0;
+        }
+        else
+        {
+            nCarry = 0;
+            *ritr = nSum;
+        }
+        ritr++;
+
+        while (nCarry != 0 && ritr != digits.rend())
+        {
+            nSum = *ritr + nCarry;
+            if (nSum > 9)
+            {
+                nCarry = 1;
+                *ritr = 0;
+            }
+            else
+            {
+                nCarry = 0;
+                *ritr = nSum;
+            }
+
+            ritr++;
+        }
+
+        if(nCarry == 1)
+        {
+            nRet.push_back(1);
+        }
+
+        std::vector<int>::iterator itr;
+        for(itr = digits.begin(); itr != digits.end(); itr++)
+        {
+            nRet.push_back(*itr);
+        }
+
+        return nRet;
     }
 };
 
 int main()
 {
-    std::vector<int> input = {4, 3, 2, 1};
-
+    //std::vector<int> input = {1, 9, 9, 9, 9};
+    std::vector<int> input = {9};
+    Solution s;
+    std::vector<int> result = s.plusOne(input);
+    std::vector<int>::iterator itr;
+    for (itr = result.begin(); itr != result.end(); itr++)
+    {
+        std::cout << *itr;
+    }
     return 0;
 }

@@ -79,6 +79,7 @@ public:
         return strRet;
     }
 
+private:
     void makeSumResult(char a, char b, char& result, char& carry)
     {
         if(a == '0' && b == '0' && carry == '0')

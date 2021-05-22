@@ -87,7 +87,7 @@ public:
                 }
                 else if (arrayInt.at(i - 1) < arrayInt.at(i))
                 {
-                    nRet += (arrayInt.at(i) - 2*arrayInt.at(i - 1));
+                    nRet += (arrayInt.at(i) - 2 * arrayInt.at(i - 1));
                 }
             }
         }

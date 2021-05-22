@@ -38,7 +38,7 @@ public:
         {
             for (itr = strs.begin(); itr != strs.end(); itr++)
             {
-                if((*itr).length() == 0)
+                if ((*itr).length() == 0)
                 {
                     break;
                 }
@@ -74,8 +74,8 @@ public:
                 break;
             }
         }
-        
-        if(vecPrefix.size() == 0)
+
+        if (vecPrefix.size() == 0)
         {
             return "";
         }
@@ -83,7 +83,7 @@ public:
         {
             std::string retStr = "";
             std::vector<char>::iterator itr;
-            for(itr = vecPrefix.begin(); itr != vecPrefix.end(); itr++)
+            for (itr = vecPrefix.begin(); itr != vecPrefix.end(); itr++)
             {
                 retStr += (*itr);
             }
@@ -95,7 +95,7 @@ public:
 
 int main()
 {
-    std::vector<std::string> strs = {"flower","flow","flight"};
+    std::vector<std::string> strs = {"flower", "flow", "flight"};
     Solution s;
     std::cout << s.longestCommonPrefix(strs) << std::endl;
     return 0;

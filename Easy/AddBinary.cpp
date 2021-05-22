@@ -34,7 +34,7 @@ public:
         int nLenA = a.length();
         int nLenB = b.length();
         int nDiff = 0;
-        
+
         std::string strSmall;
         std::string strBig;
 
@@ -65,9 +65,9 @@ public:
         }
 
         std::string strRet = "";
-        if(carry == '1')
+        if (carry == '1')
         {
-             strRet += '1';
+            strRet += '1';
         }
 
         std::vector<char>::reverse_iterator ritrVec;
@@ -80,39 +80,39 @@ public:
     }
 
 private:
-    void makeSumResult(char a, char b, char& result, char& carry)
+    void makeSumResult(char a, char b, char &result, char &carry)
     {
-        if(a == '0' && b == '0' && carry == '0')
+        if (a == '0' && b == '0' && carry == '0')
         {
             result = '0';
             carry = '0';
         }
-        else if(a == '0' && b == '0' && carry == '1')
+        else if (a == '0' && b == '0' && carry == '1')
         {
             result = '1';
             carry = '0';
         }
-        else if(a == '0' && b == '1' && carry == '0')
+        else if (a == '0' && b == '1' && carry == '0')
         {
             result = '1';
             carry = '0';
         }
-        else if(a == '0' && b == '1' && carry == '1')
-        {
-            result = '0';
-            carry = '1';
-        }
-        else if(a == '1' && b == '0' && carry == '0')
-        {
-            result = '1';
-            carry = '0';
-        }
-        else if(a == '1' && b == '0' && carry == '1')
+        else if (a == '0' && b == '1' && carry == '1')
         {
             result = '0';
             carry = '1';
         }
-        else if(a == '1' && b == '1' && carry == '0')
+        else if (a == '1' && b == '0' && carry == '0')
+        {
+            result = '1';
+            carry = '0';
+        }
+        else if (a == '1' && b == '0' && carry == '1')
+        {
+            result = '0';
+            carry = '1';
+        }
+        else if (a == '1' && b == '1' && carry == '0')
         {
             result = '0';
             carry = '1';

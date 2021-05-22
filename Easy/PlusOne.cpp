@@ -37,7 +37,7 @@ class Solution
 {
 public:
     std::vector<int> plusOne(std::vector<int> &digits)
-    {   
+    {
         std::vector<int> nRet;
         int nSum = 0;
         int nCarry = 0;
@@ -73,13 +73,13 @@ public:
             ritr++;
         }
 
-        if(nCarry == 1)
+        if (nCarry == 1)
         {
             nRet.push_back(1);
         }
 
         std::vector<int>::iterator itr;
-        for(itr = digits.begin(); itr != digits.end(); itr++)
+        for (itr = digits.begin(); itr != digits.end(); itr++)
         {
             nRet.push_back(*itr);
         }

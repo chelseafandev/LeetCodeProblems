@@ -45,7 +45,7 @@ public:
     int searchInsert(std::vector<int> &nums, int target)
     {
         int nLen = nums.size();
-        if(target < nums[0])
+        if (target < nums[0])
         {
             return 0;
         }

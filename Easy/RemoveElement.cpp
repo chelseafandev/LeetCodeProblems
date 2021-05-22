@@ -46,19 +46,21 @@ Constraints:
 #include <iostream>
 #include <vector>
 
-class Solution {
+class Solution
+{
 public:
-    int removeElement(std::vector<int>& nums, int val) {
+    int removeElement(std::vector<int> &nums, int val)
+    {
 
-        if(nums.size() == 0)
+        if (nums.size() == 0)
         {
             return 0;
-        }   
+        }
 
         std::vector<int>::iterator itr = nums.begin();
-        while(itr != nums.end())
+        while (itr != nums.end())
         {
-            if(val == *itr)
+            if (val == *itr)
             {
                 nums.erase(itr);
             }

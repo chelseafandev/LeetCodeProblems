@@ -35,6 +35,8 @@ Constraints:
 Methods pop, top and getMin operations will always be called on non-empty stacks.
 At most 3 * 10^4 calls will be made to push, pop, top, and getMin.
 */
+#include <iostream>
+#include <vector>
 
 class MinStack
 {
@@ -42,29 +44,56 @@ public:
     /** initialize your data structure here. */
     MinStack()
     {
-        
+
     }
     
     void push(int val)
     {
-        
+        storage_.push_back(val);
     }
     
     void pop()
     {
-        
+        int nPos = storage_.size() - 1;
+        storage_.erase(storage_.begin() + nPos);
     }
     
     int top()
     {
-        
+        return storage_.back();
     }
     
     int getMin()
     {
-        
+        std::vector<int>::iterator itr = storage_.begin();
+        int min = *itr;
+        for (itr = storage_.begin() + 1; itr != storage_.end(); itr++)
+        {
+            if (min > *itr)
+                min = *itr;
+        }
+
+        return min;
     }
+private:
+    std::vector<int> storage_;
 };
+
+int main()
+{   
+    MinStack* obj = new MinStack();
+    obj->push(-2);
+    obj->push(0);
+    obj->push(-3);
+    int param_3 = obj->getMin();
+    std::cout << "getMin() = " << param_3 << std::endl;
+    obj->pop();
+    int param_4 = obj->top();
+    std::cout << "getMin() = " << param_4 << std::endl;
+    int param_5 = obj->getMin();
+    std::cout << "getMin() = " << param_5 << std::endl;
+    return 0;
+}
 
 /**
  * Your MinStack object will be instantiated and called as such:

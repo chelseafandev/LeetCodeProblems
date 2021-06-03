@@ -28,6 +28,7 @@ LeetCode 1일 1문 실천😎
 
 - Best Time to Buy and Sell Stock [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/BestTimeToBuyandSellStock.cpp)
   - Wrong Answer 1회
+  - Time Limit Exceeded 2회
 <br>
 
 ### Medium

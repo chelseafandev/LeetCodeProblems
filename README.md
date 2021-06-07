@@ -26,9 +26,15 @@ LeetCode 1일 1문 실천😎
 - Climbing Stairs [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/ClimbingStairs.cpp)
   - Wrong Answer 1회
 
-- Best Time to Buy and Sell Stock [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/BestTimeToBuyandSellStock.cpp)
+- Majority Element [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/MajorityElement.cpp)
+  - Wring Answer 1회
+
+- (Solving) Best Time to Buy and Sell Stock [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/BestTimeToBuyandSellStock.cpp)
   - Wrong Answer 1회
   - Time Limit Exceeded 2회
+
+- (Sloving) Intersection Of Two Linked List [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/IntersectionOfTwoLinkedList.cpp)
+  - Wrong Answer 1회
 <br>
 
 ### Medium

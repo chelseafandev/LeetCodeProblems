@@ -93,12 +93,12 @@ public:
             nLen = stackA.size();
         }
 
-        int tmpInterSection = 0;
+        std::vector<int> candidate;
         for (int i = 0; i < nLen; i++)
         {
             if (stackA.top() == stackB.top())
             {
-                tmpInterSection = stackA.top();
+                candidate.push_back(stackA.top());
                 stackA.pop();
                 stackB.pop();
             }
@@ -107,13 +107,23 @@ public:
                 break;
             }
         }
-        if (tmpInterSection == 0)
+
+        if (candidate.empty())
         {
             return nullptr;
         }
         else
         {
-            retNode = new ListNode(tmpInterSection);
+
+            std::vector<int>::reverse_iterator ritr = candidate.rbegin();
+            retNode = new ListNode(*ritr);
+            ListNode *cur = retNode;
+            for (ritr = candidate.rbegin() + 1; ritr != candidate.rend(); ritr++)
+            {
+                ListNode *added = new ListNode(*ritr);
+                cur->next = added;
+                cur = cur->next;
+            }
         }
 
         return retNode;
@@ -157,6 +167,7 @@ int main()
     std::cout << cur->val;
     while (cur->next != nullptr)
     {
+        std::cout << " → ";
         cur = cur->next;
         std::cout << cur->val;
     }

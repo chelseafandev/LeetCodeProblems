@@ -28,7 +28,7 @@ public:
         int n = nums.size();
         int *pArray = new int[n + 1];
 
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i <= n; i++)
         {
             pArray[i] = 0;
         }
@@ -55,9 +55,7 @@ public:
 
 int main()
 {
-    std::vector<int> input = {
-        1,
-        1};
+    std::vector<int> input = {1, 1};
     Solution s;
     std::vector<int> output = s.findDisappearedNumbers(input);
     int nLen = output.size();

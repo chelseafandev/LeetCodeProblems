@@ -27,7 +27,10 @@ LeetCode 1일 1문 실천😎
   - Wrong Answer 1회
 
 - Majority Element [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/MajorityElement.cpp)
-  - Wring Answer 1회
+  - Wrong Answer 1회
+
+- Linked List Cycle [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/LinkedListCycle.cpp)
+  - Wrong Answer 1회
 
 - (Solving) Best Time to Buy and Sell Stock [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/BestTimeToBuyandSellStock.cpp)
   - Wrong Answer 1회

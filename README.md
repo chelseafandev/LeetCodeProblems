@@ -2,6 +2,12 @@
 
 LeetCode 1일 1문 실천😎
 
+- [LeetCodeProblems](#leetcodeproblems)
+  - [Acceptance를 깎아먹은 문제들은?](#acceptance를-깎아먹은-문제들은)
+    - [Easy](#easy)
+    - [Medium](#medium)
+  - [Easy인데 충분히 생각할 거리가 있었던 문제들은?](#easy인데-충분히-생각할-거리가-있었던-문제들은)
+
 ## Acceptance를 깎아먹은 문제들은?
 ### Easy
 - Reverse Integer [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/ReverseInteger.cpp)
@@ -54,3 +60,8 @@ AddTwoNumbersv2.cpp [소스로 이동](https://github.com/junhaeng90/LeetCodePro
 
 - ZigZag Conversion [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Medium/ZigZagConversion.cpp)
   - Wring Answer 1회
+<br>
+
+## Easy인데 충분히 생각할 거리가 있었던 문제들은?
+- Maximum Depth Of Binary Tree [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/MaximumDepthOfBinaryTree.cpp)
+  - tree와 dfs를 함께 생각해야 했던 문제😃

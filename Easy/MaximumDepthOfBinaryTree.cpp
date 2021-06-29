@@ -23,6 +23,8 @@ Constraints:
 The number of nodes in the tree is in the range [0, 10^4].
 -100 <= Node.val <= 100
 */
+#include <iostream>
+#include <stack>
 
 struct TreeNode
 {
@@ -34,37 +36,67 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+struct TreeNodeWithDepth
+{
+    int depth;
+    TreeNode *node;
+};
+
 class Solution
 {
 public:
     int maxDepth(TreeNode *root)
     {
-        int left_max = 0;
-        if (root != nullptr)
-        {
-            left_max = subTreeDepth(root->left, 0);
-            subTreeDepth(root->right);
-        }
-    }
+        int max_depth = 0;
+        std::stack<TreeNodeWithDepth *> stack_dfs;
 
-private:
-    int subTreeDepth(TreeNode *root, int count)
-    {
         if (root != nullptr)
         {
-            subTreeDepth(root->left, count++);
-            subTreeDepth(root->right, count++);
+            TreeNodeWithDepth *newNode = new TreeNodeWithDepth();
+            newNode->depth = 1;
+            newNode->node = root;
+            stack_dfs.push(newNode);
         }
-        else
+
+        while (!stack_dfs.empty())
         {
-            return count;
+            TreeNodeWithDepth *top = stack_dfs.top();
+            stack_dfs.pop();
+
+            if (top->node->left != nullptr)
+            {
+                TreeNodeWithDepth *newNode = new TreeNodeWithDepth();
+                newNode->depth = top->depth + 1;
+                newNode->node = top->node->left;
+                stack_dfs.push(newNode);
+            }
+
+            if (top->node->right != nullptr)
+            {
+                TreeNodeWithDepth *newNode = new TreeNodeWithDepth();
+                newNode->depth = top->depth + 1;
+                newNode->node = top->node->right;
+                stack_dfs.push(newNode);
+            }
+
+            if (max_depth < top->depth)
+            {
+                max_depth = top->depth;
+            }
         }
+
+        return max_depth;
     }
 };
 
 int main()
 {
-    Solution s;
+    // [3,9,20,null,null,15,7]
+    TreeNode *leftSubTree = new TreeNode(9, nullptr, nullptr);
+    TreeNode *rightSubTree = new TreeNode(20, new TreeNode(17), new TreeNode(7));
+    TreeNode *p = new TreeNode(3, leftSubTree, rightSubTree);
 
+    Solution s;
+    std::cout << s.maxDepth(p) << std::endl;
     return 0;
 }

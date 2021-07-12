@@ -38,6 +38,9 @@ LeetCode 1일 1문 실천😎
 - Linked List Cycle [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/LinkedListCycle.cpp)
   - Wrong Answer 1회
 
+- Sqrt(x) [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/Sqrtx.cpp)
+  - Runtime Error 1회
+
 - (Solving) Best Time to Buy and Sell Stock [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/BestTimeToBuyandSellStock.cpp)
   - Wrong Answer 1회
   - Time Limit Exceeded 2회

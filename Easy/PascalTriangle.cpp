@@ -37,8 +37,8 @@ public:
                 }
                 else
                 {
-                    int data = output[i - 1][j - 1] + output[i - 1][j];
-                    element.push_back(data);
+                    // 아래 코드는 LeetCode 실행 결과, heap-buffer-overflow가 발생함
+                    element.push_back(output[i - 1][j - 1] + output[i - 1][j]);
                 }
             }
             output.push_back(element);

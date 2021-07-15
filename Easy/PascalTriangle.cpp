@@ -23,6 +23,7 @@ class Solution
 public:
     std::vector<std::vector<int>> generate(int numRows)
     {
+        /*
         std::vector<std::vector<int>> output;
         output.reserve(numRows);
         for (int i = 0; i < numRows; i++)
@@ -44,6 +45,38 @@ public:
             output.push_back(element);
         }
         return output;
+        */
+
+        //
+        std::vector<std::vector<int>> retVector;
+        int output[30][30] = {0, };
+        for (int i = 0; i < numRows; i++)
+        {
+            output[i][0] = 1;
+            for (int j = 1; j < i + 1; j++)
+            {
+                if (j == numRows - 1)
+                {
+                    output[i][j] = 1;
+                }
+                else
+                {
+                    output[i][j] = output[i - 1][j - 1] + output[i - 1][j];
+                }
+            }
+        }
+
+        for (int i = 0; i < numRows; i++)
+        {
+            std::vector<int> tmp;
+            for (int j = 0; j < i + 1; j++)
+            {
+                tmp.push_back(output[i][j]);
+            }
+            retVector.push_back(tmp);
+        }
+
+        return retVector;
     }
 };
 

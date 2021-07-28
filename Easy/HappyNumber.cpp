@@ -33,6 +33,9 @@ class Solution
 public:
     bool isHappy(int n)
     {
+        // 810은 rough하게 잡은 Happy Number 후보군 범위다
+        // 2^31 - 1 = 2,147,483,647 즉, 최대 10자리
+        // 모든 자리의 수가 9라고 쳐도(실제 2^31 - 1을 초과하지만) 최대 10 x 9^2 = 810
         bool isCheck[810 + 1] = {
             false,
         };

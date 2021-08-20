@@ -47,6 +47,10 @@ LeetCode 1일 1문 실천😎([내 계정 정보](https://leetcode.com/chelseafa
 
 - (Sloving) Intersection Of Two Linked List [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/IntersectionOfTwoLinkedList.cpp)
   - Wrong Answer 1회
+  
+- (Reference) Convert Sorted Array to Binary Search Tree [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/ConvertSortedArraytoBST.cpp)
+  - 정렬된 vector의 중간 값은 BST의 root다(!)
+  - 정렬된 vector라는 것을 활용하여 서브 트리에 포함시킬 sub vector를 구한다(!)
 <br>
 
 ### Medium

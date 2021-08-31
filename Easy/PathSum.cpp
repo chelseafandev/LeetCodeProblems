@@ -37,13 +37,66 @@ struct TreeNode
 class Solution
 {
 public:
+    Solution()
+    {
+        result_ = false;
+    }
+
     bool hasPathSum(TreeNode *root, int targetSum)
     {
+        int partialSum = 0;
+        recursiveCall(root, targetSum, partialSum);
 
+        return result_;
+    }
+
+private:
+    bool result_;
+
+    void recursiveCall(TreeNode *root, int targetSum, int partialSum)
+    {
+        if(result_)
+            return;
+
+        if(root == nullptr)
+            return;
+
+        if(root->left == nullptr && root->right == nullptr)
+        {
+            std::cout << "total = " << root->val + partialSum << std::endl;
+            if(root->val + partialSum == targetSum)
+                result_ = true;
+            
+            return;
+        }
+
+        int added = root->val + partialSum;
+
+        recursiveCall(root->left, targetSum, added);
+        recursiveCall(root->right, targetSum, added);
     }
 };
 
 int main()
 {
+    TreeNode *left1_1 = new TreeNode(11, new TreeNode(7), new TreeNode(2));
+    
+    TreeNode *left1_2 = new TreeNode(13, nullptr, nullptr);
+    TreeNode *right1_2 = new TreeNode(4, nullptr, new TreeNode(1));
+    
+    TreeNode *left2 = new TreeNode(4, left1_1, nullptr);
+    TreeNode *right2 = new TreeNode(8, left1_2, right1_2);
+
+    TreeNode *root = new TreeNode(5, left2, right2);
+
+    int targetSum = 22;
+
+    Solution s;
+    
+    if(s.hasPathSum(root, targetSum))
+        std::cout << "true!" << std::endl;
+    else
+        std::cout << "false!" << std::endl;
+
     return 0;
 }

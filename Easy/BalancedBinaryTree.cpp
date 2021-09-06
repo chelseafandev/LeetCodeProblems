@@ -36,36 +36,84 @@ struct TreeNode
 class Solution
 {
 public:
+    Solution()
+    {
+        isBalanced_ = true;
+    }
+
     bool isBalanced(TreeNode *root)
     {
-        bool bRet = false;
         recursiveCall(root, 0);
-        return bRet;
-
+        return isBalanced_;
     }
 
 private:
-    void recursiveCall(TreeNode *root, int h)
+    bool isBalanced_;
+
+    int recursiveCall(TreeNode *root, int h)
     {
         if(root == nullptr)
-        {
-            std::cout << h << std::endl;
-            return;
-        }
-            
-        
+            return h;
+
         int added = h + 1;
-        recursiveCall(root->left, added);
-        recursiveCall(root->right, added);
+        int left_depth = recursiveCall(root->left, added);
+        std::cout << "h: " << h << " root->val: " << root->val << " left_depth = " << left_depth << std::endl;
+        int right_depth = recursiveCall(root->right, added);
+        std::cout << "h: " << h << " root->val: " << root->val << " right_depth = " << right_depth << std::endl;
+
+        int larger = 0;
+        int diff = 0;
+        if(left_depth > right_depth)
+        {
+            larger = left_depth;
+            diff = left_depth - right_depth;
+        }
+        else
+        {
+            larger = right_depth;
+            diff = right_depth - left_depth;
+        }
+
+        if(diff > 1)
+        {
+            isBalanced_ = false;
+        }
+
+        return larger;
     }
 };
 
 int main()
-{
+{  
+    /* 
+    // example1
     TreeNode *left = new TreeNode(9, nullptr, nullptr);
     TreeNode *right = new TreeNode(20, new TreeNode(15), new TreeNode(7));
     TreeNode *root = new TreeNode(3, left, right);
-    
+    */
+
+    /*
+    // example2
+    TreeNode *leftOfleft = new TreeNode(3, new TreeNode(4), new TreeNode(4));
+    TreeNode *left = new TreeNode(2, leftOfleft, new TreeNode(3));
+    TreeNode *root = new TreeNode(3, left, new TreeNode(2));
+    */
+
+    /*
+    // example3
+    TreeNode *root = nullptr;
+    */
+
+    /*
+    // example4
+    TreeNode *rightOfright = new TreeNode(1, nullptr, new TreeNode(4));
+    TreeNode *right = new TreeNode(10, new TreeNode(2), rightOfright);
+
+    TreeNode *leftOfleft = new TreeNode(3, new TreeNode(8), nullptr);
+    TreeNode *left = new TreeNode(9, leftOfleft, nullptr);
+    TreeNode *root = new TreeNode(7, left, right);
+    */
+
     Solution s;
     std::cout << s.isBalanced(root) << std::endl;
     return 0;

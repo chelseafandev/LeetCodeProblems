@@ -53,6 +53,7 @@ LeetCode 1일 1문 실천😎([내 계정 정보](https://leetcode.com/chelseafa
   - 정렬된 vector라는 것을 활용하여 서브 트리에 포함시킬 sub vector를 구한다(!)
 
 - Balanced Binary Tree [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/BalancedBinaryTree.cpp)
+  - recursive를 어떻게 적용할지 고민을 좀 했던 문제
 
 <br>
 

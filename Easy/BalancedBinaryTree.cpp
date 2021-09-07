@@ -104,7 +104,6 @@ int main()
     TreeNode *root = nullptr;
     */
 
-    /*
     // example4
     TreeNode *rightOfright = new TreeNode(1, nullptr, new TreeNode(4));
     TreeNode *right = new TreeNode(10, new TreeNode(2), rightOfright);
@@ -112,7 +111,6 @@ int main()
     TreeNode *leftOfleft = new TreeNode(3, new TreeNode(8), nullptr);
     TreeNode *left = new TreeNode(9, leftOfleft, nullptr);
     TreeNode *root = new TreeNode(7, left, right);
-    */
 
     Solution s;
     std::cout << s.isBalanced(root) << std::endl;

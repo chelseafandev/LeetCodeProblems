@@ -64,10 +64,9 @@ private:
 
 int main()
 {
-    std::string input = "3,9,20,null,null,15,7";
-
+    std::string input = "1,2,2,3,3,null,null,4,4,5";
     util::Helper helper;
-    TreeNode* root = helper.convertStr2BinaryTree(input);
+    TreeNode* root = helper.convertStr2Tree(input);
     
     Solution s;
     std::cout << s.minDepth(root) << std::endl;

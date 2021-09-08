@@ -64,7 +64,11 @@ private:
 
 int main()
 {
-    std::string input = "1,2,2,3,3,null,null,4,4,5";
+    std::string input = "3,9,20,null,null,15,7";
+    //std::string input = "2,null,3,null,4,null,5,null,6";
+    //std::string input = "2,3,null,4,null,5,null,6,null";
+    //std::string input = "1,2,2,3,3,null,null,4,4,5";
+
     util::Helper helper;
     TreeNode* root = helper.convertStr2Tree(input);
     

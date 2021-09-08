@@ -44,7 +44,8 @@ namespace util
                 token = std::strtok(nullptr, delimiters);
             }
 
-            return includeNullptr ? convertStr2BinaryTree(v) : convertStr2CompleteBinaryTree(v);
+            //return includeNullptr ? convertStr2BinaryTree(v) : convertStr2CompleteBinaryTree(v);
+            return convertStr2BinaryTree(v);
         }
     private:
         TreeNode *convertStr2CompleteBinaryTree(const std::vector<TreeNode *>& v)
@@ -81,6 +82,64 @@ namespace util
         TreeNode *convertStr2BinaryTree(const std::vector<TreeNode *>& v)
         {
             std::cout << "start convertStr2BinaryTree!" << std::endl;
+
+            if(v.empty())
+                return nullptr;
+            
+            int cur_idx = 0;
+            TreeNode* cur = v[cur_idx];
+
+            bool left_force_complete = false;
+            bool right_force_complete = false;
+            for(int i = 1; i < v.size(); i++)
+            {
+                if( left_force_complete == true && right_force_complete == true ||
+                    cur->left != nullptr && cur->right != nullptr ||
+                    left_force_complete == true && cur->right != nullptr ||
+                    cur->left != nullptr && right_force_complete == true )
+                {
+                    cur_idx++;
+                    cur = v[cur_idx];
+                    
+                    if(cur == nullptr)
+                    {
+                        while(cur == nullptr)
+                        {
+                            cur_idx++;
+                            cur = v[cur_idx];
+                        }
+                    }
+
+                    left_force_complete = false;
+                    right_force_complete = false;
+                }
+
+                if(cur->left == nullptr && left_force_complete == false)
+                {
+                    if(v[i] != nullptr)
+                    {
+                        cur->left = v[i];
+                    }
+                    else
+                    {
+                        left_force_complete = true;
+                    }
+                    continue;
+                }
+                    
+                if(cur->right == nullptr && right_force_complete == false)
+                {
+                    if(v[i] != nullptr)
+                    {
+                        cur->right = v[i];
+                    }
+                    else
+                    {
+                        right_force_complete = true;
+                    }
+                    continue;
+                }
+            }
 
             return v[0];
         }

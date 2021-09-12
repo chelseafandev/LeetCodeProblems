@@ -47,6 +47,58 @@ namespace util
             //return includeNullptr ? convertStr2BinaryTree(v) : convertStr2CompleteBinaryTree(v);
             return convertStr2BinaryTree(v);
         }
+
+        ListNode *convertStr2List(std::string input)
+        {
+            ListNode *result = nullptr;
+
+            const char *delimiters = ",";
+
+            int inputLen = input.length();
+            char tmpInput[inputLen + 1];
+            std::strcpy(tmpInput, input.c_str());
+
+            ListNode *prev = nullptr;
+            
+            char *token = std::strtok(tmpInput, delimiters);
+            while (token)
+            {
+                std::string data = token;
+                ListNode *added = new ListNode(atoi(token));
+                
+                if(prev != nullptr)
+                    prev->next = added;
+                else
+                    result = added;
+            
+                prev = added;
+
+                token = std::strtok(nullptr, delimiters);
+            }
+
+            return result;
+        }
+
+        void printListNode(ListNode *head)
+        {
+            std::cout << "print ListNode [ ";
+
+            if (head == nullptr)
+            {
+                std::cout << "]" << std::endl;
+                return;
+            }
+
+            ListNode *cur = head;
+            do
+            {
+                std::cout << cur->val << " ";
+                cur = cur->next;
+            } while (cur != nullptr);
+
+            std::cout << "]" << std::endl;
+        }
+
     private:
         TreeNode *convertStr2CompleteBinaryTree(const std::vector<TreeNode *>& v)
         {

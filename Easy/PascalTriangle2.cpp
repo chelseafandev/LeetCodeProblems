@@ -31,12 +31,61 @@ public:
     std::vector<int> getRow(int rowIndex)
     {
         // 최적화에 신경써보자(extra space를 O(rowIndex)만 사용해서)
-        
-        
+        std::vector<int> result;
+
+        if (rowIndex == 0)
+        {
+            result.push_back(1);
+            return result;
+        }
+
+        if (rowIndex == 1)
+        {
+            result.push_back(1);
+            result.push_back(1);
+            return result;
+        }
+
+        std::vector<int> prev_vector;
+        for (int i = 0; i < rowIndex + 1; i ++)
+        {
+            if (i == 0 || i == 1)
+            {
+                prev_vector.push_back(1);
+            }
+            else
+            {
+                result.clear();
+                result.push_back(1);
+                for (int j = 0; j < i - 1; j++)
+                {
+                    result.push_back(prev_vector[j] + prev_vector[j+1]);
+                }
+                result.push_back(1);
+
+                if (i == rowIndex)
+                    return result;
+                else
+                    prev_vector = std::move(result);
+            }
+        }
+
+        return result;
     }
 };
 
 int main()
 {
+    int input = 5;
+    Solution s;
+    auto result = s.getRow(input);
+    
+    std::cout << "[ ";
+    for(auto itr = result.begin(); itr != result.end(); itr++)
+    {
+        std::cout << *itr << " ";
+    }
+    std::cout << "]" << std::endl;
+
     return 0;
 }

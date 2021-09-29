@@ -57,6 +57,7 @@ LeetCode 1일 1문 실천😎([내 계정 정보](https://leetcode.com/chelseafa
 
 - Intersection Of Two Arrays 2 [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/IntersectionOfTwoArrays2.cpp)
   - 두 배열 간의 Intersection이라는 것이 요소 간의 순서를 고려해야하는지 아닌지가 문제에 명확히 명시되어있지않음😨
+  - Wrong Answer 3회
 
 <br>
 

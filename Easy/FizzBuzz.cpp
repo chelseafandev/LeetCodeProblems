@@ -30,13 +30,38 @@ class Solution
 public:
     std::vector<std::string> fizzBuzz(int n)
     {
+        std::vector<std::string> result;
 
+        for(int i = 1; i <= n; i++)
+        {
+            if (i % 3 == 0)
+            {
+                if (i % 5 == 0)
+                {
+                    result.push_back("FizzBuzz");
+                }
+                else
+                {
+                    result.push_back("Fizz");
+                }
+            }
+            else if (i % 5 == 0)
+            {
+                result.push_back("Buzz");
+            }
+            else
+            {
+                result.push_back(std::to_string(i));
+            }
+        }
+
+        return result;
     }
 };
 
 int main()
 {
-    int input = 3;
+    int input = 30;
     Solution s;
     auto v = s.fizzBuzz(input);
     std::cout << "[ ";

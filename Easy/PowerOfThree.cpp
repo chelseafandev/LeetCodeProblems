@@ -26,19 +26,33 @@ Follow up: Could you solve it without loops/recursion?
 */
 
 #include <iostream>
+#include <cmath>
 
 class Solution
 {
 public:
     bool isPowerOfThree(int n)
     {
+        if (n == 0)
+            return false;
         
+        if (n == 1)
+            return true;
+
+        if (n % 3 != 0)
+            return false;
+        
+        int temp = n / 3;
+        if (temp == 1)
+            return true;
+
+        return isPowerOfThree(temp);
     }
 };
 
 int main()
 {
-    int input = 27;
+    int input = 1;
     Solution s;
     std::cout << std::boolalpha << s.isPowerOfThree(input) << std::endl;
     return 0;

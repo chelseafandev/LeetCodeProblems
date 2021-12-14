@@ -17,7 +17,7 @@ Output: 1
 
 
 Constraints:
-The number of nodes in the tree is in the range [1, 104].
+The number of nodes in the tree is in the range [1, 10^4].
 -100 <= Node.val <= 100
 */
 
@@ -28,15 +28,39 @@ The number of nodes in the tree is in the range [1, 104].
 class Solution
 {
 public:
+    Solution() 
+    {
+        diameter_ = 0;
+    }
+
     int diameterOfBinaryTree(TreeNode *root)
     {
+        get_diameter(root);
+        return diameter_;
     }
+
+private:
+    int get_diameter(TreeNode* node)
+    {
+        if (node == nullptr)
+        {
+            return 0;
+        }
+
+        int left_height = get_diameter(node->left);
+        int right_height = get_diameter(node->right);
+        diameter_ = diameter_ > left_height + right_height ? diameter_ : left_height + right_height;
+        return (left_height > right_height ? left_height : right_height) + 1;
+    }
+
+    int diameter_;
 };
 
 int main()
 {
-    std::string root = "1,2,3,4,5";
-    TreeNode* input = convertStr2Tree(root);
+    util::Helper helper;
+    std::string root = "1,2,3,4,5,6,7,8,9,10";
+    TreeNode* input = helper.convertStr2Tree(root);
 
     Solution s;
     int reulst = s.diameterOfBinaryTree(input);

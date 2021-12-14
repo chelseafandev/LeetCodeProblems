@@ -62,6 +62,10 @@ LeetCode 1일 1문 실천😎([내 계정 정보](https://leetcode.com/chelseafa
 - Excel Sheet Column Number [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/ExcelSheetColumnNumber.cpp)
   - 너무 복잡하게 생각했던 문제. 점화식 풀듯이 풀어나가면 훨씬 간단하게 풀렸을듯함😬
   - Discuss 참조
+
+- Diameter Of Binary Tree [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/DiameterOfBinaryTree.cpp)
+  - recursive를 어떻게 적용해야할지 감이 오지 않았던 문제. 서브 트리의 root를 기준으로 diameter를 구해서 큰 값을 찾으면 될거라는 생각은했지만 실제 코드 구현에서 막힘.
+  - 솔루션 참조
 <br>
 
 ### Medium

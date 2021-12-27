@@ -85,6 +85,9 @@ AddTwoNumbersv2.cpp [소스로 이동](https://github.com/junhaeng90/LeetCodePro
 
 - Container With Most Water [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Medium/ContainerWithMostWater.cpp)
   - 답안 참조. Two Pointer Approach!
+
+- Decode String [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/DecodeString.cpp)
+  - 답안 참조. 중첩된 bracket의 문자열을 어떻게 처리할 것인가?
 <br>
 
 ## Easy인데 충분히 생각할 거리가 있었던 문제들은?

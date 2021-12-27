@@ -25,170 +25,112 @@ All the integers in s are in the range [1, 300].
 
 #include <iostream>
 #include <stack>
-#include <vector>
 
 class Solution
 {
 public:
     std::string decodeString(std::string s)
     {
-        // no repetition
-        if (s[0] < '0' || s[0] > '9')
-        {
-            return s;
-        }
+        std::stack<int> integerstack;
+        std::stack<char> stringstack;
 
-        std::stack<std::string> brackets;
-        std::stack<std::string> characters;
-        std::stack<int> repetition;
-
-        // for tracking
-        std::string::iterator cur = s.begin();
-
-        repetition.push(*cur - '0');
-        std::cout << "push repetition : " << *cur - '0' << std::endl;
-        cur++;
-
-        bool no_more_push_in_nested = false;
-        std::string character = "";
-        std::stack<std::string> nested;
-        while (cur != s.end())
-        {
-            if (*cur == '[')
-            {
-                if(brackets.empty())
-                {
-                    brackets.push("[");
-                }
-                else
-                {
-                    brackets.push("[");
-                    std::cout << "push nested : " << character << std::endl;
-                    nested.push(character); // construct nested bracket
-                    character = "";
-                }
-            }
-            else if (*cur == ']')
-            {
-                brackets.pop();
-
-                if (brackets.empty())
-                {
-                    if(nested.empty())
-                    {
-                        std::cout << "complete character : " << character << std::endl;
-                        characters.push(character); // complete character
-                        character = "";             // init character
-                    }
-                    else
-                    {
-                        std::string candidate = "";
-                        std::string top = nested.top();
-                        for (int i = 0; i < repetition.top(); i++)
-                        {
-                            std::string tmp = top + character;
-                            candidate += tmp;
-                        }
-                        character = candidate;
-                        std::cout << "complete character : " << character << std::endl;
-                        characters.push(character); // complete character
-                        character = "";             // init character
-                        nested.pop();
-                        repetition.pop();
-                    }
-                }
-                else
-                {
-                    if(!nested.empty() && !no_more_push_in_nested)
-                    {
-                        std::cout << "push nested : " << character << std::endl;
-                        nested.push(character); // construct nested bracket
-                        character = "";
-                    }
-
-                    if(character.compare("") == 0)
-                    {
-                        for (int i = 0; i < repetition.top(); i++)
-                        {
-                            character += nested.top();
-                        }
-                        std::cout << "(empty character) construct character: " << character << std::endl;
-                        no_more_push_in_nested = true;
-                    }
-                    else
-                    {
-                        std::string candidate = "";
-                        std::string top = nested.top();
-                        for (int i = 0; i < repetition.top(); i++)
-                        {
-                            std::string tmp = top + character;
-                            candidate += tmp;
-                        }
-                        character = candidate;
-                    }
-                    nested.pop();
-                    repetition.pop();
-                }
-            }
-            else if (*cur >= '0' && *cur <= '9')
-            {
-                std::cout << "push repetition : " << *cur - '0' << std::endl;
-                repetition.push(*cur - '0');
-            }
-            else
-            {
-                // construct character
-                character += *cur;
-                std::cout << "construct character : " << character << std::endl;
-                
-                if(brackets.empty())
-                {
-                    repetition.push(1);
-                    characters.push(character);
-                    character = "";
-                }
-            }
-
-            cur++;
-        }
-
-        // make result
-        std::vector<std::string> v;
-        std::string added = "";
-        while (!repetition.empty())
-        {
-            for (int i = 0; i < repetition.top(); i++)
-            {
-                added += characters.top();
-            }
-            v.push_back(added);
-            added.clear();
-
-            repetition.pop();
-            characters.pop();
-        }
-
+        std::string temp = "";
         std::string result = "";
-        for(auto ritr = v.rbegin(); ritr != v.rend(); ritr++)
+
+        // Traversing the string
+        for (int i = 0; i < s.length(); i++)
         {
-            result += *ritr;
+            int count = 0;
+
+            // If number, convert it into number
+            // and push it into integerstack.
+            if (s[i] >= '0' && s[i] <= '9')
+            {
+                while (s[i] >= '0' && s[i] <= '9')
+                {
+                    count = count * 10 + s[i] - '0';
+                    i++;
+                }
+
+                i--;
+                integerstack.push(count);
+            }
+
+            // If closing bracket ']', pop element until
+            // '[' opening bracket is not found in the
+            // character stack.
+            else if (s[i] == ']')
+            {
+                temp = "";
+                count = 0;
+
+                if (!integerstack.empty())
+                {
+                    count = integerstack.top();
+                    integerstack.pop();
+                }
+
+                while (!stringstack.empty() && stringstack.top() != '[')
+                {
+                    temp = stringstack.top() + temp;
+                    stringstack.pop();
+                }
+
+                if (!stringstack.empty() && stringstack.top() == '[')
+                    stringstack.pop();
+
+                // Repeating the popped string 'temo' count
+                // number of times.
+                for (int j = 0; j < count; j++)
+                    result = result + temp;
+
+                // Push it in the character stack.
+                for (int j = 0; j < result.length(); j++)
+                    stringstack.push(result[j]);
+
+                result = "";
+            }
+
+            // If '[' opening bracket, push it into character stack.
+            else if (s[i] == '[')
+            {
+                if (s[i - 1] >= '0' && s[i - 1] <= '9')
+                    stringstack.push(s[i]);
+
+                else
+                {
+                    stringstack.push(s[i]);
+                    integerstack.push(1);
+                }
+            }
+
+            else
+                stringstack.push(s[i]);
         }
 
-        return result.empty() ? characters.top() : result;
+        // Pop all the element, make a string and return.
+        while (!stringstack.empty())
+        {
+            result = stringstack.top() + result;
+            stringstack.pop();
+        }
+
+        return result;
     }
 };
 
 int main()
 {
-    //std::string input = "3[a2[c3[d]]]";
-    //std::string input = "3[a]2[b]c4[d]";
-    
-    //std::string input = "3[a]2[bc]";
-    //std::string input = "3[a2[c]]";
-    std::string input = "2[abc]3[cd]ef";
+    // std::string input = "3[a2[c3[d]]]";
+    // std::string input = "3[a]2[b]c4[d]";
+
+    // std::string input = "3[a]2[bc]";
+    // std::string input = "3[a2[c]]";
+    // std::string input = "2[abc]3[cd]ef";
+    std::string input = "3[z]2[2[y]pq4[2[jk]e1[f]]]ef";
 
     Solution s;
     std::string result = s.decodeString(input);
-    std::cout << "result = " << result << std::endl;
+    std::cout << "result: " << result << std::endl;
     return 0;
 }

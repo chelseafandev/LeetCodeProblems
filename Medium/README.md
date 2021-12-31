@@ -9,3 +9,10 @@
 - 문제 : [Decode String](https://leetcode.com/problems/decode-string/)
 - 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/DecodeString.cpp)
 - 참고사이트 : https://www.geeksforgeeks.org/decode-string-recursively-encoded-count-followed-substring/
+
+<br>
+
+### 2021년 12월 다섯째주 LeetCode 문제
+- 문제 : [Number of Islands](https://leetcode.com/problems/number-of-islands/)
+- 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/NumberOfIslands.cpp)
+- 참고사이트 : 

@@ -37,6 +37,14 @@ public:
     Solution()
     {
         last_flag_ = 0;
+
+        for (int i = 0; i < 300; i++)
+        {
+            for (int j = 0; j < 300; j++)
+            {
+                flag_map_[i][j] = false;
+            }
+        }
     }
 
     int numIslands(const std::vector<std::vector<char>> &grid)
@@ -54,21 +62,8 @@ public:
         }
 
         row_ = grid.size();
-        flag_map_.reserve(row_);
         col_ = grid[0].size();
-        for(int i = 0; i < row_; i++)
-        {
-            flag_map_[i].reserve(col_);
-        }
-
-        for (int i = 0; i < row_; i++)
-        {
-            for (int j = 0; j < col_; j++)
-            {
-                flag_map_[i][j] = false;
-            }
-        }
-        
+       
         // 인접한 모든 grid의 요소를 체크하기 위해 stack 활용
         std::stack<std::pair<int, int>> s;
         for (int i = 0; i < row_; i++)
@@ -140,16 +135,17 @@ private:
     int row_;
     int col_;
 
-    std::vector<std::vector<bool>> flag_map_;
+    // std::vector<std::vector<bool>> flag_map_;
+    bool flag_map_[300][300];
     int last_flag_;
 };
 
 int main()
 {
     std::vector<std::vector<char>> input = {
-        {'1', '1', '0', '1', '0'},
-        {'1', '1', '1', '1', '1'},
-        {'0', '0', '0', '0', '0'},
+        {'1', '1', '0', '0', '0'},
+        {'1', '1', '0', '0', '0'},
+        {'0', '0', '1', '0', '0'},
         {'0', '0', '0', '1', '1'}};
 
     Solution s;

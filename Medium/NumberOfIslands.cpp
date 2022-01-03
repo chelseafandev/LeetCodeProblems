@@ -36,8 +36,6 @@ class Solution
 public:
     Solution()
     {
-        last_flag_ = 0;
-
         for (int i = 0; i < 300; i++)
         {
             for (int j = 0; j < 300; j++)
@@ -61,11 +59,21 @@ public:
             return 0;
         }
 
+        int total_island_cnt = 0;
         row_ = grid.size();
         col_ = grid[0].size();
        
-        // 인접한 모든 grid의 요소를 체크하기 위해 stack 활용
+        // 전략
+        // 1. 일단 grid내에 land가 존재한다면 그 land는 항상 island일 것이다.
+        // 2. 인접한 모든 land를 전부 다 조회하면 하나의 island가 된다.
+        //
+        // grid의 요소를 방문했는지 여부를 저장하기 위해 bool형 2차원 배열을 선언하고, 최초 (0,0)에서 시작하여 해당 grid의 요소가 land인 경우에는 인접한 모든 land의 2차원 배열의 값 갱신을 수행함. 인접한 모든 land를 찾았다면 총 island의 개수 값을 증가시켜줌.
+        //
+        // 모든 grid의 요소를 방문하며, 해당 요소가 land인 경우에는 인접(up, down, left, right)한 모든 land를 다 방문하여 flag값을 바꿔줌. 이때 인접한 모든 grid의 요소를 체크하기 위해 stack을 활용(DFS 개념)
+        
+        // grid의 좌표 값을 저장하기위해 pair 타입을 사용함
         std::stack<std::pair<int, int>> s;
+
         for (int i = 0; i < row_; i++)
         {
             for (int j = 0; j < col_; j++)
@@ -80,15 +88,16 @@ public:
                         flag_map_[popped.first][popped.second] = true;
                         push_adjacent_land(grid, popped.first, popped.second, s);
                     }
-                    last_flag_++;
+                    total_island_cnt++;
                 }
             }
         }
         
-        return last_flag_;
+        return total_island_cnt;
     }
 
 private:
+    // 인접한 land를 stack에 push하는 함수. grid의 인덱스 체크는 필수
     void push_adjacent_land(const std::vector<std::vector<char>> &grid, int r, int c, std::stack<std::pair<int, int>>& s)
     {
         // up
@@ -135,9 +144,9 @@ private:
     int row_;
     int col_;
 
-    // std::vector<std::vector<bool>> flag_map_;
+    // grid의 요소를 방문했는지 여부를 확인하기 위한 bool형 2차원 배열
+    // leetcode에서는 std::vector<std::vector<bool>> 사용이 안되던데..? 그래서 그냥 2차원 배열로 바꿈
     bool flag_map_[300][300];
-    int last_flag_;
 };
 
 int main()

@@ -31,88 +31,86 @@ class Solution
 public:
     std::string decodeString(std::string s)
     {
-        std::stack<int> integerstack;
-        std::stack<char> stringstack;
+        std::stack<char> characters;
+        std::stack<int> repetitions;
 
-        std::string temp = "";
-        std::string result = "";
-
-        // Traversing the string
-        for (int i = 0; i < s.length(); i++)
+        std::string str_number = "";
+        auto start = s.begin();
+        while (start != s.end())
         {
-            int count = 0;
-
-            // If number, convert it into number
-            // and push it into integerstack.
-            if (s[i] >= '0' && s[i] <= '9')
+            if (*start >= '0' && *start <= '9')
             {
-                while (s[i] >= '0' && s[i] <= '9')
-                {
-                    count = count * 10 + s[i] - '0';
-                    i++;
-                }
-
-                i--;
-                integerstack.push(count);
+                // repetition number 처리
+                // 제약조건에 따라 repetition number 값의 범위는 [1, 300]
+                str_number += *start;
             }
-
-            // If closing bracket ']', pop element until
-            // '[' opening bracket is not found in the
-            // character stack.
-            else if (s[i] == ']')
+            else if (*start == '[')
             {
-                temp = "";
-                count = 0;
-
-                if (!integerstack.empty())
+                // '['인 경우
+                // '[' 이전 문자가 숫자인 경우와 아닌 경우로 나누는 이유는 1이 생략된 경우를 처리하기 위해서다(주어진 문제만 봐서는 1이 생략될수있는지 여부를 알기힘들다.. 일단 Wrong Answer를 보고나서야..)
+                char previous = *(start - 1);
+                if (previous >= '0' && previous <= '9')
                 {
-                    count = integerstack.top();
-                    integerstack.pop();
+                    characters.push(*start);
+                    repetitions.push(std::stoi(str_number)); // string to int
+                    str_number = ""; // string init
                 }
-
-                while (!stringstack.empty() && stringstack.top() != '[')
-                {
-                    temp = stringstack.top() + temp;
-                    stringstack.pop();
-                }
-
-                if (!stringstack.empty() && stringstack.top() == '[')
-                    stringstack.pop();
-
-                // Repeating the popped string 'temo' count
-                // number of times.
-                for (int j = 0; j < count; j++)
-                    result = result + temp;
-
-                // Push it in the character stack.
-                for (int j = 0; j < result.length(); j++)
-                    stringstack.push(result[j]);
-
-                result = "";
-            }
-
-            // If '[' opening bracket, push it into character stack.
-            else if (s[i] == '[')
-            {
-                if (s[i - 1] >= '0' && s[i - 1] <= '9')
-                    stringstack.push(s[i]);
-
                 else
                 {
-                    stringstack.push(s[i]);
-                    integerstack.push(1);
+                    characters.push(*start);
+                    repetitions.push(1);
                 }
             }
+            else if (*start == ']')
+            {
+                // ']'인 경우
+                // 1. characters 스택에서 다음 '['가 나올때까지 문자들을 pop해서 문자열을 완성한다. 다만 여기서 완성된 문자열은 다시 한번 reverse(!)해주어야 한다.
+                // 2. 1번 과정이 완료된 후에 repetitions 스택에 저장된 숫자가 존재하는 경우 맨위의 값을 꺼내어 생성된 문자열을 그 값만큼 반복해준다.
+                // 3. 2번 과정까지 완료된 문자열을 다시 characters 스택에 저장
+                std::string added = "";
+                while(characters.top() != '[')
+                {
+                    added = characters.top() + added; // 나중에 reverse 안하려고 여기에서 처리함
+                    characters.pop();
+                }
 
+                if (characters.top() == '[')
+                {
+                    characters.pop();
+                }
+
+                if (!repetitions.empty())
+                {
+                    std::string origin = added;
+                    added = "";
+                    for (int i = 0; i < repetitions.top(); i++)
+                    {
+                        added += origin;
+                    }
+                    repetitions.pop();
+                }
+                
+                std::cout << "complete added: " << added << std::endl;
+
+                for (auto& c : added)
+                {
+                    characters.push(c);
+                }
+            }
             else
-                stringstack.push(s[i]);
+            {
+                // character 처리
+                characters.push(*start);
+            }
+
+            start++;
         }
 
-        // Pop all the element, make a string and return.
-        while (!stringstack.empty())
+        std::string result = "";
+        while(!characters.empty())
         {
-            result = stringstack.top() + result;
-            stringstack.pop();
+            result = characters.top() + result;
+            characters.pop();
         }
 
         return result;

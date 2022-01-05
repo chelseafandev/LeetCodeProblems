@@ -15,3 +15,9 @@
 ### 2021년 12월 다섯째주 LeetCode 문제
 - 문제 : [Number of Islands](https://leetcode.com/problems/number-of-islands/)
 - 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/NumberOfIslands.cpp)
+
+<br>
+
+### 2022년 1월 첫째주 LeetCode 문제
+- 문제 : 
+- 풀이 : 

@@ -1,6 +1,6 @@
 /*
 You are given an array prices where prices[i] is the price of a given stock on the ith day.
-You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future 
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future
 to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 
 Example 1:
@@ -26,55 +26,41 @@ class Solution
 public:
     int maxProfit(std::vector<int>& prices)
     {
-        int idx_buy = 0;
-        int idx_sell = 0;
+        // sell할 수 있는 날들 중 가장 비싼 값을 미리 저장
+        // max_sell[i] : i번째 날에 buy를 하는 경우, 남은 날들 중 가장 비싸게 팔 수 있는 가격
+        int tmp = 0;
+        int max_sell[prices.size() - 1];
+        for (int i = prices.size() - 2; i >= 0; i--)
+        {
+            if (tmp < prices[i+1])
+            {
+                tmp = prices[i+1];
+            }
+
+            max_sell[i] = tmp;
+        }
+
+        // 아래 for문에서 i는 buy 시점
+        int buy = 0;
         int profit = 0;
-
-        if(prices.size() == 0)
+        int max_profit = 0;
+        for (int i = 0; i < prices.size() - 1; i++)
         {
-            return 0;
+            profit = max_sell[i] - prices[i];
+
+            if(max_profit < profit)
+            {
+                max_profit = profit;
+            }
         }
 
-        idx_buy = 0;
-        while (idx_buy < prices.size()-1)
-        {
-            int tmp_idx_sell = 0;
-            int tmp_max_price = 0;
-            for (int i = idx_buy + 1; i < prices.size(); i++)
-            {
-                // 최대값을 구한다
-                // 여기서 equal 조건이 빠지면 무한 루프에 빠짐(!)
-                if (tmp_max_price <= prices[i])
-                {
-                    tmp_max_price = prices[i];
-                    tmp_idx_sell = i;
-                }
-            }
-
-            for (int i = idx_buy + 1; i < tmp_idx_sell; i++)
-            {
-                if (prices[idx_buy] > prices[i])
-                {
-                    idx_buy = i;
-                }
-            }
-
-            int tmp_profit = prices[tmp_idx_sell] - prices[idx_buy];
-            if(profit < tmp_profit)
-            {
-                profit = tmp_profit;
-            }
-
-            idx_buy = tmp_idx_sell;
-        }
-
-        return profit;
+        return max_profit;
     }
 };
 
 int main()
 {
-    std::vector<int> input = {98,100,99,98,97,96,95,94,93,1,4};
+    std::vector<int> input = {7,6,4,3,1};
     Solution s;
     std::cout << s.maxProfit(input) << std::endl;
     return 0;

@@ -41,9 +41,10 @@ LeetCode 1일 1문 실천😎([내 계정 정보](https://leetcode.com/chelseafa
 - Sqrt(x) [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/Sqrtx.cpp)
   - Runtime Error 1회
 
-- (Solving) Best Time to Buy and Sell Stock [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/BestTimeToBuyandSellStock.cpp)
+- Best Time to Buy and Sell Stock [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/BestTimeToBuyandSellStock.cpp)
   - Wrong Answer 1회
   - Time Limit Exceeded 2회
+  - sell할 수 있는 날들 중 가장 비싼 값을 미리 저장해두자
 
 - (Sloving) Intersection Of Two Linked List [소스로 이동](https://github.com/junhaeng90/LeetCodeProblems/blob/main/Easy/IntersectionOfTwoLinkedList.cpp)
   - Wrong Answer 1회

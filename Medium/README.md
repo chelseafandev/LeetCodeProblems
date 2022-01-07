@@ -19,5 +19,5 @@
 <br>
 
 ### 2022년 1월 첫째주 LeetCode 문제
-- 문제 : 
-- 풀이 : 
+- 문제 : [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+- 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/LowestCommonAncestorOfBinaryTree.cpp)

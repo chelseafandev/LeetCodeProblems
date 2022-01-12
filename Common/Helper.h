@@ -99,6 +99,26 @@ namespace util
             std::cout << "]" << std::endl;
         }
 
+        void print_tree(TreeNode* root, int depth)
+        {
+            std::cout << std::setw(4 * depth) << "";
+            if (root == nullptr)
+            {
+                std::cout << "[Empty]" << std::endl;
+            }
+            else if (root->left == nullptr && root->right == nullptr)
+            {
+                std::cout << root->val;
+                std::cout << " [leaf]" << std::endl;
+            }
+            else
+            {
+                std::cout << root->val << std::endl;
+                print_tree(root->right, depth + 1);
+                print_tree(root->left, depth + 1);
+            }
+        }
+
     private:
         TreeNode *convertStr2CompleteBinaryTree(const std::vector<TreeNode *>& v)
         {

@@ -105,7 +105,7 @@ int main()
     // std::string input = "-1,0,3,-2,4,null,null,8";
     std::string input = "37,-34,-48,null,-100,-101,48,null,null,null,null,-54,null,-71,-22,null,null,null,8";
     util::Helper h;
-    TreeNode *root = h.convertStr2Tree(input);
+    TreeNode *root = h.convert_string_to_tree(input);
     Solution s;
     auto result = s.lowestCommonAncestor(root, new TreeNode(-71), new TreeNode(8));
     std::cout << "find LCA: " << result->val << std::endl;

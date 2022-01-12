@@ -12,7 +12,7 @@ namespace util
     class Helper
     {
     public:
-        TreeNode *convertStr2Tree(std::string input)
+        TreeNode *convert_string_to_tree(std::string input)
         {
             bool includeNullptr = false;
 
@@ -44,11 +44,11 @@ namespace util
                 token = std::strtok(nullptr, delimiters);
             }
 
-            //return includeNullptr ? convertStr2BinaryTree(v) : convertStr2CompleteBinaryTree(v);
-            return convertStr2BinaryTree(v);
+            //return includeNullptr ? convert_string_to_binary_tree(v) : convert_string_to_complete_binary_tree(v);
+            return convert_string_to_binary_tree(v);
         }
 
-        ListNode *convertStr2List(std::string input)
+        ListNode *convert_string_to_list(std::string input)
         {
             ListNode *result = nullptr;
 
@@ -79,7 +79,7 @@ namespace util
             return result;
         }
 
-        void printListNode(ListNode *head)
+        void print_list(ListNode *head)
         {
             std::cout << "print ListNode [ ";
 
@@ -120,9 +120,9 @@ namespace util
         }
 
     private:
-        TreeNode *convertStr2CompleteBinaryTree(const std::vector<TreeNode *>& v)
+        TreeNode *convert_string_to_complete_binary_tree(const std::vector<TreeNode *>& v)
         {
-            std::cout << "start convertStr2CompleteBinaryTree!" << std::endl;
+            std::cout << "start convert_string_to_complete_binary_tree!" << std::endl;
 
             // left child index = 2i+1
             // right child index = 2i+2
@@ -151,9 +151,9 @@ namespace util
             return v[0];
         }
 
-        TreeNode *convertStr2BinaryTree(const std::vector<TreeNode *>& v)
+        TreeNode *convert_string_to_binary_tree(const std::vector<TreeNode *>& v)
         {
-            std::cout << "start convertStr2BinaryTree!" << std::endl;
+            std::cout << "start convert_string_to_binary_tree!" << std::endl;
 
             if(v.empty())
                 return nullptr;

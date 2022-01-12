@@ -150,7 +150,9 @@ namespace util
 
             return v[0];
         }
-
+        
+        // v: left와 right가 모두 nullptr인 val만 존재하는 TreeNode*가 저장된 벡터
+        // 해당 함수를 통해 left와 right를 완성해나간다
         TreeNode *convert_string_to_binary_tree(const std::vector<TreeNode *>& v)
         {
             std::cout << "start convert_string_to_binary_tree!" << std::endl;
@@ -161,20 +163,23 @@ namespace util
             int cur_idx = 0;
             TreeNode* cur = v[cur_idx];
 
-            bool left_force_complete = false;
-            bool right_force_complete = false;
-            for(int i = 1; i < v.size(); i++)
+            bool left_is_empty = false; // 왼쪽 자식 노드를 채우려고 딱 봤는데 해당 노드가 nullptr인 경우에 true로 변경(채웠다고 생각하고 다음 노드로 넘어가기 위해 사용함)
+            bool right_is_empty = false; // 오른쪽 자식 노드를 채우려고 딱 봤는데 해당 노드가 nullptr인 경우에 true로 변경(채웠다고 생각하고 다음 노드로 넘어가기 위해 사용함)
+            for(int i = 1; i < v.size(); i++) // 벡터 v의 index는 1부터 시작함
             {
-                if( left_force_complete == true && right_force_complete == true ||
-                    cur->left != nullptr && cur->right != nullptr ||
-                    left_force_complete == true && cur->right != nullptr ||
-                    cur->left != nullptr && right_force_complete == true )
+                // 다음 노드를 선택하기 위한 cursor 값 변경(아래 if문 조건이 cursor 값을 변경하기 위한 조건임)
+                if( (left_is_empty == true && right_is_empty == true) ||    // 왼쪽, 오른쪽 자식 노드가 둘다 nullptr로 채워진 경우
+                    (cur->left != nullptr && cur->right != nullptr) ||      // 왼쪽, 오른쪽 자식 노드가 둘다 nullptr이 아닌 값으로 채워진 경우
+                    (left_is_empty == true && cur->right != nullptr) ||     // 왼쪽 자식 노드는 nullptr로 오른쪽 자식 노드는 nullptr이 아닌 값으로 채워진 경우
+                    (cur->left != nullptr && right_is_empty == true) )      // 오른쪽 자식 노드는 nullptr로 왼쪽 자식 노드는 nullptr이 아닌 값으로 채워진 경우
                 {
                     cur_idx++;
                     cur = v[cur_idx];
                     
+                    // 벡터 v에 nullptr이 연속해서 저장되어있는 경우 처리
                     if(cur == nullptr)
                     {
+                        // Tree 입력으로 전달되는 문자열의 마지막이 null인 경우(무한루프에 빠지는 경우)가 존재하는가? No!
                         while(cur == nullptr)
                         {
                             cur_idx++;
@@ -182,11 +187,12 @@ namespace util
                         }
                     }
 
-                    left_force_complete = false;
-                    right_force_complete = false;
+                    left_is_empty = false;
+                    right_is_empty = false;
                 }
 
-                if(cur->left == nullptr && left_force_complete == false)
+                // 왼쪽 자식 노드 연결
+                if(cur->left == nullptr && left_is_empty == false)
                 {
                     if(v[i] != nullptr)
                     {
@@ -194,12 +200,13 @@ namespace util
                     }
                     else
                     {
-                        left_force_complete = true;
+                        left_is_empty = true;
                     }
                     continue;
                 }
                     
-                if(cur->right == nullptr && right_force_complete == false)
+                // 오른쪽 자식 노드 연결
+                if(cur->right == nullptr && right_is_empty == false)
                 {
                     if(v[i] != nullptr)
                     {
@@ -207,7 +214,7 @@ namespace util
                     }
                     else
                     {
-                        right_force_complete = true;
+                        right_is_empty = true;
                     }
                     continue;
                 }

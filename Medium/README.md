@@ -27,3 +27,9 @@
 ### 2022년 1월 둘째주 LeetCode 문제
 - 문제 : [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
 - 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/FindFirstandLastPositionofElementinSortedArray.cpp)
+
+<br>
+
+### 2022년 1월 셋째주 LeetCode 문제
+- 문제 : [Word Break](https://leetcode.com/problems/word-break/)
+- 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/WordBreak.cpp)

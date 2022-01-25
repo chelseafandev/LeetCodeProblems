@@ -28,13 +28,68 @@ All the strings of wordDict are unique.
 
 #include <iostream>
 #include <vector>
+#include <set>
+#include <stack>
+
+class WordInfo
+{
+public:
+    WordInfo(std::string word, int s, int e) : word_(word), start_idx_(s), end_idx_(e)
+    {
+
+    }
+
+    int start_idx_;
+    int end_idx_;
+    std::string word_;
+}
 
 class Solution
 {
 public:
     bool wordBreak(std::string s, std::vector<std::string> &wordDict)
     {
-        
+        // 단어를 찾을때 O(logn)의 시간복잡도를 갖도록 하기위해 set에 저장
+        std::set<std::string> words;
+        for (const auto& word : wordDict)
+        {
+            words.insert(word);
+        }
+
+        // match된 단어의 마지막 인덱스를 저장해두는 stack
+        std::stack<WordInfo> match_index;
+
+        // 최초 match 단어 찾은 후 stack에 push
+        bool is_matched = false;
+        std::string first = "";
+        int start_idx = 0;
+        int end_idx = 0;
+        for (const auto& character : s)
+        {
+            first += character;
+            if (words.find(first) != words.end())
+            {
+                is_matched = true;
+                break;
+            }
+            end_idx++;
+        }
+
+        if (!is_matched)
+        {
+            return false;
+        }
+
+        WordInfo info(first, start_idx, end_idx);
+        match_index.push(info);
+
+        // assemble looping
+        // - start_idx와 end_idx는 계속 tracking
+        // - first를 찾은 후 남은 문자열 s에서 wordDict에 매칭되는 단어를 찾았으면 stack에 push
+        // - 찾지 못한 경우라면 stack의 top값(WordInfo)에서 start_idx 및 end_idx를 조회하여 이어서 assemble
+        // - loop 탈출 조건은 다시 한번 생각해보기
+
+        return true;
     }
 };
 

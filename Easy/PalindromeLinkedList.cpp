@@ -65,15 +65,22 @@ public:
 
         return true;
     }
+
+    // Follow up: Could you do it in O(n) time and O(1) space?
+    bool isPalindrome_version2(ListNode *head)
+    {
+        
+    }
 };
 
 int main()
 {
     std::string input = "1,2,3,2,1";
     util::Helper helper;
-    ListNode *head = helper.convertStr2List(input);
+    ListNode *head = helper.convert_string_to_list(input);
     
     Solution s;
-    std::cout << std::boolalpha << s.isPalindrome(head) << std::endl;
+    // std::cout << std::boolalpha << s.isPalindrome(head) << std::endl;
+    std::cout << std::boolalpha << s.isPalindrome_version2(head) << std::endl;
     return 0;
 }

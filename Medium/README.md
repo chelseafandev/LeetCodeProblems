@@ -33,3 +33,11 @@
 ### 2022년 1월 셋째주 LeetCode 문제
 - 문제 : [Word Break](https://leetcode.com/problems/word-break/)
 - 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/WordBreak.cpp)
+- 앞으로 DP 문제는 제외시키기
+
+### 2022년 1월 넷째주 LeetCode 문제 -- Easy 2문제로 대체
+- 문제1 : [Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)
+- 풀이  : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Easy/PalindromeLinkedList.cpp)
+
+- 문제2 : [](https://leetcode.com/problems/)
+- 풀이  : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Easy/)

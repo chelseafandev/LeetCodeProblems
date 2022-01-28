@@ -39,5 +39,5 @@
 - 문제1 : [Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)
 - 풀이  : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Easy/PalindromeLinkedList.cpp)
 
-- 문제2 : [](https://leetcode.com/problems/)
-- 풀이  : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Easy/)
+- 문제2 : [Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
+- 풀이  : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Easy/InvertBinaryTree.cpp)

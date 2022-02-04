@@ -33,6 +33,7 @@
 ### 2022년 1월 셋째주 LeetCode 문제
 - 문제 : [139. Word Break](https://leetcode.com/problems/word-break/)
 - 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/WordBreak.cpp)
+- 참고사이트 : https://www.geeksforgeeks.org/word-break-problem-dp-32/
 - 앞으로 DP 문제는 제외시키기😭
 
 <br>

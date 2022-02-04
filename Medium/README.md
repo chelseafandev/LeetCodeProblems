@@ -41,6 +41,7 @@
 ### 2022년 1월 넷째주 LeetCode 문제 -- Easy 2문제로 대체
 - 문제1 : [234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)
 - 풀이  : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Easy/PalindromeLinkedList.cpp)
+- O(n) time and O(1) space를 만족하는 솔루션은 [해당 링크](https://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/)의 METHOD2를 참고함
 
 - 문제2 : [226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
 - 풀이  : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Easy/InvertBinaryTree.cpp)

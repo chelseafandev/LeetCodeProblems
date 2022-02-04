@@ -22,8 +22,33 @@ The number of nodes in the tree is in the range [0, 100].
 
 class Solution {
 public:
-    TreeNode* invertTree(TreeNode* root) {
+    TreeNode* invertTree(TreeNode* root)
+    {
+        if (root == nullptr)
+        {
+            return nullptr;
+        }
+
+        make_swap(root);
+
+        return root;
+    }
+
+private:
+    void make_swap(TreeNode* root)
+    {
+        if (root == nullptr)
+        {
+            return;
+        }
+
+        // swap!
+        TreeNode* tmp = root->left;
+        root->left = root->right;
+        root->right = tmp;
         
+        make_swap(root->left);
+        make_swap(root->right);
     }
 };
 

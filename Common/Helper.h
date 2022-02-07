@@ -48,6 +48,41 @@ namespace util
             return convert_string_to_binary_tree(v);
         }
 
+        SpecialNode *convert_string_to_tree_for_special_node(std::string input)
+        {
+            bool includeNullptr = false;
+
+            std::vector<SpecialNode *> v;
+
+            const char *delimiters = ",";
+
+            int inputLen = input.length();
+            char tmpInput[inputLen + 1];
+            std::strcpy(tmpInput, input.c_str());
+
+            char *token = std::strtok(tmpInput, delimiters);
+            while (token)
+            {
+                std::string data = token;
+                if (data.compare("null") == 0)
+                {
+                    includeNullptr = true;
+                    v.push_back(nullptr);
+                    std::cout << "push: nullptr" << std::endl;
+                }
+                else
+                {
+                    SpecialNode *added = new SpecialNode(atoi(token));
+                    std::cout << "push: " << atoi(token) << std::endl;
+                    v.push_back(added);
+                }
+
+                token = std::strtok(nullptr, delimiters);
+            }
+
+            return convert_string_to_binary_tree(v);
+        }
+
         ListNode *convert_string_to_list(std::string input)
         {
             ListNode *result = nullptr;
@@ -120,7 +155,8 @@ namespace util
         }
 
     private:
-        TreeNode *convert_string_to_complete_binary_tree(const std::vector<TreeNode *>& v)
+        template <typename T>
+        T* convert_string_to_complete_binary_tree(const std::vector<T*>& v)
         {
             std::cout << "start convert_string_to_complete_binary_tree!" << std::endl;
 
@@ -153,7 +189,8 @@ namespace util
         
         // v: left와 right가 모두 nullptr인 val만 존재하는 TreeNode*가 저장된 벡터
         // 해당 함수를 통해 left와 right를 완성해나간다
-        TreeNode *convert_string_to_binary_tree(const std::vector<TreeNode *>& v)
+        template <typename T>
+        T* convert_string_to_binary_tree(const std::vector<T*>& v)
         {
             std::cout << "start convert_string_to_binary_tree!" << std::endl;
 
@@ -161,7 +198,7 @@ namespace util
                 return nullptr;
             
             int cur_idx = 0;
-            TreeNode* cur = v[cur_idx];
+            T* cur = v[cur_idx];
 
             bool left_is_empty = false; // 왼쪽 자식 노드를 채우려고 딱 봤는데 해당 노드가 nullptr인 경우에 true로 변경(채웠다고 생각하고 다음 노드로 넘어가기 위해 사용함)
             bool right_is_empty = false; // 오른쪽 자식 노드를 채우려고 딱 봤는데 해당 노드가 nullptr인 경우에 true로 변경(채웠다고 생각하고 다음 노드로 넘어가기 위해 사용함)

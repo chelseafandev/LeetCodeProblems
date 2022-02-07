@@ -44,7 +44,7 @@ public:
     SpecialNode* connect(SpecialNode* root)
     {
         map_type nodes_per_level;
-        make_node_vector(nodes_per_level, root, 0);
+        make_nodes_per_level_map(nodes_per_level, root, 0);
 
         for (const auto& nodes : nodes_per_level)
         {
@@ -58,7 +58,7 @@ public:
     }
 
 private:
-    void make_node_vector(map_type& nodes_per_level, SpecialNode* root, int level)
+    void make_nodes_per_level_map(map_type& nodes_per_level, SpecialNode* root, int level)
     {
         if (root == nullptr)
         {
@@ -77,8 +77,8 @@ private:
         }
 
         level++;
-        make_node_vector(nodes_per_level, root->left, level);
-        make_node_vector(nodes_per_level, root->right, level);
+        make_nodes_per_level_map(nodes_per_level, root->left, level);
+        make_nodes_per_level_map(nodes_per_level, root->right, level);
     }
 };
 

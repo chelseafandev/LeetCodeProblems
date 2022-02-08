@@ -33,7 +33,7 @@ The recursive approach is fine. You may assume implicit stack space does not cou
 #include <iostream>
 #include <vector>
 #include <map>
-
+#include <queue>
 #include "Common/Helper.h"
 
 class Solution
@@ -41,6 +41,13 @@ class Solution
 public:
     typedef std::map<int, std::vector<SpecialNode*>> map_type;
 
+    struct QueueData
+    {
+        int level;
+        SpecialNode* node;
+    };
+
+    // 50ms, 18.4MB
     SpecialNode* connect(SpecialNode* root)
     {
         map_type nodes_per_level;
@@ -51,6 +58,60 @@ public:
             for (int i = 0; i < nodes.second.size() - 1; i++)
             {
                 (nodes.second)[i]->next = (nodes.second)[i+1];
+            }
+        }
+
+        return root;
+    }
+    
+    // bfs 활용
+    // 18ms, 17.7MB
+    SpecialNode* connect_version2(SpecialNode* root)
+    {
+        if (root == nullptr)
+        {
+            return root;
+        }
+
+        std::queue<QueueData> q;
+        QueueData data;
+        data.level = 0;
+        data.node = root;
+        q.push(data);
+        QueueData prev = data;
+
+        // bfs
+        while(!q.empty())
+        {
+            auto popped = q.front();
+            q.pop();
+
+            if (popped.node->left != nullptr)
+            {
+                QueueData added;
+                added.level = popped.level + 1;
+                added.node = popped.node->left;
+                q.push(added);
+            }
+
+            if (popped.node->right != nullptr)
+            {
+                QueueData added;
+                added.level = popped.level + 1;
+                added.node = popped.node->right;
+                q.push(added);
+            }
+
+            if (prev.level != 0 && prev.level == popped.level)
+            {
+                // set prev and next
+                prev.node->next = popped.node;
+                prev = popped;
+            }
+            else
+            {
+                // set prev
+                prev = popped;
             }
         }
 

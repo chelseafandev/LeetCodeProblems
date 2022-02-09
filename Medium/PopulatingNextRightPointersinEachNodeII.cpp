@@ -41,19 +41,20 @@ class Solution
 public:
     typedef std::map<int, std::vector<SpecialNode*>> map_type;
 
+    // depth와 node로 구성된 구조체 정의
     struct QueueData
     {
-        int level;
+        int depth;
         SpecialNode* node;
     };
 
     // 50ms, 18.4MB
     SpecialNode* connect(SpecialNode* root)
     {
-        map_type nodes_per_level;
-        make_nodes_per_level_map(nodes_per_level, root, 0);
+        map_type nodes_per_depth;
+        make_nodes_per_depth_map(nodes_per_depth, root, 0);
 
-        for (const auto& nodes : nodes_per_level)
+        for (const auto& nodes : nodes_per_depth)
         {
             for (int i = 0; i < nodes.second.size() - 1; i++)
             {
@@ -73,11 +74,16 @@ public:
             return root;
         }
 
+        // bfs를 수행하며 next를 구성하기 위해 각 노드의 depth를 함께 저장하고 있는 QueueData 구조체를 활용
         std::queue<QueueData> q;
         QueueData data;
-        data.level = 0;
+        data.depth = 0;
         data.node = root;
         q.push(data);
+
+        // connection 규칙
+        // - 현재 pop한 노드는 (동일한 depth 내에있는) 이전 노드(prev)의 next로 저장한다.
+        // - connection 작업이 끝난 현재 pop한 노드는 이전 노드(prev)가 된다.
         QueueData prev = data;
 
         // bfs
@@ -89,7 +95,7 @@ public:
             if (popped.node->left != nullptr)
             {
                 QueueData added;
-                added.level = popped.level + 1;
+                added.depth = popped.depth + 1;
                 added.node = popped.node->left;
                 q.push(added);
             }
@@ -97,49 +103,46 @@ public:
             if (popped.node->right != nullptr)
             {
                 QueueData added;
-                added.level = popped.level + 1;
+                added.depth = popped.depth + 1;
                 added.node = popped.node->right;
                 q.push(added);
             }
 
-            if (prev.level != 0 && prev.level == popped.level)
+            // connection
+            if (prev.depth != 0 && prev.depth == popped.depth)
             {
-                // set prev and next
-                prev.node->next = popped.node;
-                prev = popped;
+                prev.node->next = popped.node;   
             }
-            else
-            {
-                // set prev
-                prev = popped;
-            }
+
+            // set prev
+            prev = popped;
         }
 
         return root;
     }
 
 private:
-    void make_nodes_per_level_map(map_type& nodes_per_level, SpecialNode* root, int level)
+    void make_nodes_per_depth_map(map_type& nodes_per_depth, SpecialNode* root, int depth)
     {
         if (root == nullptr)
         {
             return;
         }
 
-        if (nodes_per_level.find(level) != nodes_per_level.end())
+        if (nodes_per_depth.find(depth) != nodes_per_depth.end())
         {
-            nodes_per_level[level].push_back(root);
+            nodes_per_depth[depth].push_back(root);
         }
         else
         {
             std::vector<SpecialNode*> tmp;
             tmp.push_back(root);
-            nodes_per_level.insert(std::make_pair(level, tmp));
+            nodes_per_depth.insert(std::make_pair(depth, tmp));
         }
 
-        level++;
-        make_nodes_per_level_map(nodes_per_level, root->left, level);
-        make_nodes_per_level_map(nodes_per_level, root->right, level);
+        depth++;
+        make_nodes_per_depth_map(nodes_per_depth, root->left, depth);
+        make_nodes_per_depth_map(nodes_per_depth, root->right, depth);
     }
 };
 

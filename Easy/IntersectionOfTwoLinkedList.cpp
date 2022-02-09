@@ -44,132 +44,29 @@ intersectVal == listA[skipA + 1] == listB[skipB + 1] if listA and listB intersec
 #include <vector>
 #include <stack>
 
-struct ListNode
-{
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(nullptr) {}
-};
+#include "Common/Helper.h"
 
 class Solution
 {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
     {
-        ListNode *retNode = nullptr;
-
-        std::stack<int> stackA, stackB;
-        ListNode *cur = headA;
-        if (cur == nullptr)
-        {
-            return nullptr;
-        }
-
-        while (cur != nullptr)
-        {
-            stackA.push(cur->val);
-            cur = cur->next;
-        }
-
-        cur = headB;
-        if (cur == nullptr)
-        {
-            return nullptr;
-        }
-
-        while (cur != nullptr)
-        {
-            stackB.push(cur->val);
-            cur = cur->next;
-        }
-
-        int nLen = 0;
-        if (stackA.size() > stackB.size())
-        {
-            nLen = stackB.size();
-        }
-        else
-        {
-            nLen = stackA.size();
-        }
-
-        std::vector<int> candidate;
-        for (int i = 0; i < nLen; i++)
-        {
-            if (stackA.top() == stackB.top())
-            {
-                candidate.push_back(stackA.top());
-                stackA.pop();
-                stackB.pop();
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        if (candidate.empty())
-        {
-            return nullptr;
-        }
-        else
-        {
-
-            std::vector<int>::reverse_iterator ritr = candidate.rbegin();
-            retNode = new ListNode(*ritr);
-            ListNode *cur = retNode;
-            for (ritr = candidate.rbegin() + 1; ritr != candidate.rend(); ritr++)
-            {
-                ListNode *added = new ListNode(*ritr);
-                cur->next = added;
-                cur = cur->next;
-            }
-        }
-
-        return retNode;
+        
     }
 };
 
 int main()
 {
-    std::vector<int> input1 = {4, 1, 8, 4, 5};
-    std::vector<int> input2 = {5, 6, 1, 8, 4, 5};
-    std::vector<int>::iterator itr;
-    ListNode *l1 = new ListNode(input1.at(0));
-    ListNode *curNode = l1;
-    for (itr = input1.begin(); itr != input1.end(); itr++)
-    {
-        if (itr == input1.begin())
-        {
-            continue;
-        }
-        ListNode *addedNode = new ListNode(*itr);
-        curNode->next = addedNode;
-        curNode = addedNode;
-    }
-
-    ListNode *l2 = new ListNode(input2.at(0));
-    curNode = l2;
-    for (itr = input2.begin(); itr != input2.end(); itr++)
-    {
-        if (itr == input2.begin())
-        {
-            continue;
-        }
-        ListNode *addedNode = new ListNode(*itr);
-        curNode->next = addedNode;
-        curNode = addedNode;
-    }
+    std::string input1 = "4,1,8,4,5";
+    std::string input2 = "5,6,1,8,4,5";
+    
+    util::Helper h;
+    ListNode* headA = h.convert_string_to_list(input1);
+    h.print_list(headA);
+    ListNode* headB = h.convert_string_to_list(input2);
+    h.print_list(headB);
 
     Solution s;
-    ListNode *ret = s.getIntersectionNode(l1, l2);
-    ListNode *cur = ret;
-    std::cout << cur->val;
-    while (cur->next != nullptr)
-    {
-        std::cout << " → ";
-        cur = cur->next;
-        std::cout << cur->val;
-    }
+    s.getIntersectionNode(headA, headB);
     return 0;
 }

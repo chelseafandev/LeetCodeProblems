@@ -51,3 +51,9 @@
 ### 2022년 2월 첫째주 LeetCode 문제
 - 문제 : [117. Populating Next Right Pointers in Each Node II](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/)
 - 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/PopulatingNextRightPointersinEachNodeII.cpp)
+
+<br>
+
+### 2022년 2월 둘째주 LeetCode 문제
+- 문제 : [787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/)
+- 풀이 : [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/CheapestFlightsWithinKstops.cpp)

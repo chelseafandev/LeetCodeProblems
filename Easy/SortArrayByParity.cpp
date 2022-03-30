@@ -24,16 +24,49 @@ Constraints:
 
 #include <iostream>
 #include <vector>
+#include <deque>
 
 class Solution
 {
 public:
     std::vector<int> sortArrayByParity(std::vector<int> &nums)
     {
+        std::deque<int> dq;
+
+        for (const auto& num : nums)
+        {
+            if (num % 2 == 0)
+            {
+                // even!
+                dq.push_front(num);
+            }
+            else
+            {
+                // odd!
+                dq.push_back(num);
+            }
+        }
+
+        std::vector<int> result;
+        for (const auto& num : dq)
+        {
+            result.push_back(dq.front());
+            dq.pop_front();
+        }
+
+        return result;
     }
 };
 
 int main()
 {
+    Solution s;
+    std::vector<int> input = {3,1,2,4};
+    std::cout << "[ ";
+    for (const auto& data : s.sortArrayByParity(input))
+    {
+        std::cout << data << " ";
+    }
+    std::cout << "]" << std::endl;
     return 0;
 }

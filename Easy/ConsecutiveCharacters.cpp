@@ -30,10 +30,43 @@ class Solution
 public:
     int maxPower(std::string s)
     {
+        if (s.length() == 1)
+        {
+            return 1;
+        }
+
+        int max_power = 0;
+        int repeat_count = 1;
+        std::string::iterator prev = s.begin();
+        for (auto cur = s.begin() + 1; cur != s.end(); cur++)
+        {
+            if (*cur == *prev)
+            {
+                repeat_count++;
+            }
+            else
+            {
+                repeat_count = 1;
+            }
+
+            // upate max_power
+            if (repeat_count > max_power)
+            {
+                max_power = repeat_count;
+            }
+
+            // update prev
+            prev = cur;
+        }
+        
+        return max_power;
     }
 };
 
 int main()
 {
+    std::string input = "abbcccddddeeeeedcba";
+    Solution s;
+    std::cout << s.maxPower(input) << std::endl;
     return 0;
 }

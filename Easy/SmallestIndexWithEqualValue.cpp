@@ -41,11 +41,22 @@ class Solution
 public:
     int smallestEqual(std::vector<int> &nums)
     {
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (i % 10 == nums[i])
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 };
 
 int main()
 {
-
+    std::vector<int> input = {4,3,2,1};
+    Solution s;
+    std::cout << s.smallestEqual(input) << std::endl;
     return 0;
 }

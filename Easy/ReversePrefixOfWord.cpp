@@ -32,12 +32,41 @@ ch is a lowercase English letter.
 */
 
 #include <iostream>
+#include <deque>
 
 class Solution
 {
 public:
     std::string reversePrefix(std::string word, char ch)
     {
+        // index of the first occurrence
+        auto found = word.find(ch);
+        if (found == std::string::npos)
+        {
+            return word;
+        }
+
+        // make reverse prefix of word using deque
+        std::deque<char> dq;
+        for (int i = 0; i < word.size(); i++)
+        {
+            if (i > found)
+            {
+                dq.push_back(word[i]);
+            }
+            else
+            {
+                dq.push_front(word[i]);
+            }
+        }
+        
+        std::string result = "";
+        for (const auto& ch : dq)
+        {
+            result += ch;
+        }
+
+        return result;
     }
 };
 

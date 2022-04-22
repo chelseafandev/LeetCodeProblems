@@ -89,6 +89,13 @@ AddTwoNumbersv2.cpp [소스로 이동](https://github.com/junhaeng90/LeetCodePro
 
 - Decode String [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/DecodeString.cpp)
   - 답안 참조. 중첩된 bracket의 문자열을 어떻게 처리할 것인가?
+
+- Sort The Matrix Diagonally [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/SortTheMatrixDiagonally.cpp)
+  - 
+
+- Minimum Operations to Reduce X to Zero [소스로 이동](https://github.com/chelseafandev/LeetCodeProblems/blob/main/Medium/MinimumOperationstoReduceXtoZero.cpp)
+  - 답안 참조. 슬라이딩 윈도우
+
 <br>
 
 ## Easy인데 충분히 생각할 거리가 있었던 문제들은?

@@ -26,15 +26,75 @@ Constraints:
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 class Solution
 {
 public:
     int minOperations(std::vector<int> &nums, int x)
     {
+        int total_sum = 0;
+        int window_len = 0;
+
+        for (const auto& num : nums)
+        {
+            total_sum += num;
+        }   
+
+        if (total_sum == x)
+        {
+            return nums.size();
+        }
+            
+        // 우리가 찾고자 하는 윈도우에 포함된 모든 요소를 더한 값
+        int window_sum = total_sum - x;
+
+        int cur_window_left_idx = 0; // 윈도우의 왼쪽 끝 인덱스
+        int cur_window_right_idx = 0; // 윈도우의 오른쪽 끝 인덱스
+        int cur_window_sum = 0; // 현재 윈도우의
+
+        while (cur_window_left_idx <= cur_window_right_idx)
+        {
+            if (cur_window_sum < window_sum)
+            {
+                if (cur_window_right_idx < nums.size())
+                {
+                    cur_window_sum += nums[cur_window_right_idx++];
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else if (cur_window_sum > window_sum)
+            {
+                cur_window_sum -= nums[cur_window_left_idx++];
+            }
+            else
+            {
+                window_len = std::max(window_len, cur_window_right_idx - cur_window_left_idx);
+                cur_window_sum -= nums[cur_window_left_idx++];
+            }
+        }
+
+        if (cur_window_sum == window_sum)
+        {
+            window_len = std::max(window_len, cur_window_right_idx - cur_window_left_idx);
+        }
+
+        if (window_len == 0)
+        {
+            return -1;
+        }
+
+        return nums.size() - window_len;
     }
 };
 
 int main()
 {
+    std::vector<int> input = {1,1,4,2,3};
+    int target = 5;
+    Solution s;
+    std::cout << s.minOperations(input, target) << std::endl;
 }

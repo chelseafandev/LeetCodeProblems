@@ -58,7 +58,7 @@ public:
             sum = postive_sum + negative_sum;
             if (sum + target <= 0)
             {
-                target += (-1 * (refer + target) + 1);
+                target += (-1 * (sum + target) + 1);
             }
         }
 

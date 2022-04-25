@@ -38,12 +38,37 @@ class Solution
 public:
     int minStartValue(std::vector<int> &nums)
     {
+        int postive_sum = 0;
+        int negative_sum = 0;
+        int sum = 0;
+
+        int target = 1;
+
+        for (const auto& num : nums)
+        {
+            if (num >= 0)
+            {
+                postive_sum += num;
+            }
+            else
+            {
+                negative_sum += num;
+            }
+
+            sum = postive_sum + negative_sum;
+            if (sum + target <= 0)
+            {
+                target += (-1 * (refer + target) + 1);
+            }
+        }
+
+        return target;
     }
 };
 
 int main()
 {
-    std::vector<int> input = {-3,2,-3,4,2};
+    std::vector<int> input = {1, -80, 22, -92};
 
     Solution s;
     std::cout << s.minStartValue(input) << std::endl;

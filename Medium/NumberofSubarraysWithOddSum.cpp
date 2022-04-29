@@ -28,17 +28,55 @@ Constraints:
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 class Solution
 {
 public:
     int numOfSubarrays(std::vector<int> &arr)
     {
-        
+        int odd_cnt = 0;
+        int even_cnt = 0;
+        long long result = 0;
+        int tmp = 0;
+
+        for (const auto& num : arr)
+        {
+            if (num % 2 == 0)
+            {
+                // even
+
+                even_cnt++;
+            }
+            else
+            {
+                // odd
+
+                // 짝수 값을 더하는 경우에는 기존의 값의 성격(짝수냐 홀수냐)이 변하지 않음
+                // odd  + even = odd
+                // even + even = even
+                //
+                // 홀수 값을 더하는 경우에는 기존의 값의 성격이 반대로 변함
+                // odd  + odd = even
+                // even + odd = odd
+                //
+                std::swap(even_cnt, odd_cnt);
+                
+                // 홀수 값 그 자체로 하나의 subarray이므로
+                odd_cnt++;
+            }
+
+            result += odd_cnt;
+        }
+
+        return result % 1000000007;
     }
 };
 
 int main()
 {
+    std::vector<int> input = {1,2,3,4,5,6,7};
+    Solution s;
+    std::cout << s.numOfSubarrays(input) << std::endl;
     return 0;
 }

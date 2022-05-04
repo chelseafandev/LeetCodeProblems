@@ -33,6 +33,37 @@ class Solution
 public:
     std::string firstPalindrome(std::vector<std::string> &words)
     {
+        for (const auto& word : words)
+        {
+            if(is_palindrome(word))
+            {
+                return word;
+            }
+        }
+
+        return "";
+    }
+
+private:
+    bool is_palindrome(const std::string& word)
+    {
+        int len = word.length();
+        
+        auto front = word.begin();
+        auto rear = word.rbegin();
+
+        for (int i = 0; i < len/2; i++)
+        {
+            if (*front != *rear)
+            {
+                return false;
+            }
+
+            front++;
+            rear++;
+        }
+
+        return true;
     }
 };
 

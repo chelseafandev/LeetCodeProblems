@@ -16,6 +16,8 @@ Constraints:
 n == nums.length
 1 <= n <= 300
 nums[i] is either 0, 1, or 2.
+
+Follow up: Could you come up with a one-pass algorithm using only constant extra space?
 */
 
 #include <iostream>
@@ -26,6 +28,23 @@ class Solution
 public:
     void sortColors(std::vector<int> &nums)
     {
+        // red, white, blue 가 nums안에 몇개씩 들어있는지를 카운팅하기 위한 변수. 색상은 index로 구분
+        std::vector<int> counts = {0, 0, 0};
+
+        for (const auto& num : nums)
+        {
+            counts[num]++;
+        }
+
+        nums.clear();
+
+        for (int color = 0; color < 3; color++)
+        {
+            for (int count = 0; count < counts[color]; count++)
+            {
+                nums.push_back(color);
+            }
+        }
     }
 };
 

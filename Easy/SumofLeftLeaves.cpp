@@ -25,13 +25,40 @@ class Solution {
 public:
     int sumOfLeftLeaves(TreeNode* root)
     {
+        int sum = 0;
+        find_left_leaf(root, false, sum);
         
+        std::cout << "sum : " << sum << std::endl;
+        return sum;
+    }
+
+private:
+    void find_left_leaf(TreeNode* root, bool is_left, int& sum)
+    {
+        if (root == nullptr)
+        {
+            return;
+        }
+        
+        if (root->left == nullptr && root->right == nullptr)
+        {
+            if (is_left == false)
+            {
+                return;
+            }
+
+            sum += root->val;
+            return;
+        }
+
+        find_left_leaf(root->left, true, sum);
+        find_left_leaf(root->right, false, sum);
     }
 };
 
 int main()
 {
-    std::string input = "3,9,20,nullptr,nullptr,15,7";
+    std::string input = "3,9,20,null,null,15,7";
     util::Helper h;
     auto root = h.convert_string_to_tree(input);
     h.print_tree(root, 0);

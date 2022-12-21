@@ -21,6 +21,11 @@ namespace util
             const char *delimiters = ",";
 
             int inputLen = input.length();
+            if (inputLen == 0)
+            {
+                return nullptr;
+            }
+
             char tmpInput[inputLen + 1];
             std::strcpy(tmpInput, input.c_str());
 
@@ -57,6 +62,11 @@ namespace util
             const char *delimiters = ",";
 
             int inputLen = input.length();
+            if (inputLen == 0)
+            {
+                return nullptr;
+            }
+
             char tmpInput[inputLen + 1];
             std::strcpy(tmpInput, input.c_str());
 
@@ -90,6 +100,11 @@ namespace util
             const char *delimiters = ",";
 
             int inputLen = input.length();
+            if (inputLen == 0)
+            {
+                return nullptr;
+            }
+            
             char tmpInput[inputLen + 1];
             std::strcpy(tmpInput, input.c_str());
 

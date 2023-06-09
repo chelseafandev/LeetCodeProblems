@@ -1,6 +1,6 @@
 # LeetCodeProblems
 
-LeetCode 1일 1문 실천😎([내 계정 정보](https://leetcode.com/chelseafandev/))
+LeetCode 1일 1문 실천([내 계정 정보](https://leetcode.com/chelseafandev/))
 
 - [LeetCodeProblems](#leetcodeproblems)
   - [Acceptance를 깎아먹은 문제들은?](#acceptance를-깎아먹은-문제들은)
